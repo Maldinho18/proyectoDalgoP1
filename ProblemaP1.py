@@ -1,5 +1,5 @@
 import sys
-from math import ceil, floor, log2
+from math import ceil, floor
 
 INF_NEG = -10**30
 
@@ -7,7 +7,6 @@ def construir(arr):
     n = len(arr)
     if n == 0:
         return [], []
-    K = int(log2(n)) + 1
     st = [arr[:] ]
     j = 1
     while (1 << j) <= n:
