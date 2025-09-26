@@ -40,7 +40,7 @@ def resolver_caso(k, n, datosCreatividad):
     for _ in range(6):
         digitos.append(x % 10)
         x //= 10
-    siguiente = [0]
+    dp = [0]
     max_siguiente = 0
     
     for p in range(5, -1, -1):
@@ -48,18 +48,18 @@ def resolver_caso(k, n, datosCreatividad):
         digito_actual = digitos[p]
         max_entrada = digito_actual + 10 * max_siguiente
         resultado_actual = [INF_NEG] * (max_entrada + 1)
-        valores_transformados = [siguiente[c] + 3 * creatividad_actual * c for c in range(max_siguiente + 1)]
+        valores_transformados = [dp[c] + 3 * creatividad_actual * c for c in range(max_siguiente + 1)]
         lista_residuos = []
         tablas = []
         tablas_logaritmos = []
         for residuo in range(3):
-            arr = []
+            arreglo = []
             multiplicador = 0
             while 3 * multiplicador + residuo <= max_siguiente:
-                arr.append(valores_transformados[3 * multiplicador + residuo] + creatividad_actual * multiplicador)
+                arreglo.append(valores_transformados[3 * multiplicador + residuo] + creatividad_actual * multiplicador)
                 multiplicador += 1
-            lista_residuos.append(arr)
-            tabla_maximos, logaritmos = construir(arr)
+            lista_residuos.append(arreglo)
+            tabla_maximos, logaritmos = construir(arreglo)
             tablas.append(tabla_maximos)
             tablas_logaritmos.append(logaritmos)
         
@@ -81,9 +81,9 @@ def resolver_caso(k, n, datosCreatividad):
                     if sol_parcial > mejor_sol:
                         mejor_sol = sol_parcial
             resultado_actual[c_actual] = mejor_sol
-        siguiente = resultado_actual
+        dp = resultado_actual
         max_siguiente = max_entrada
-    return siguiente[0]
+    return dp[0]
 
 def main():
     data = sys.stdin.read().strip().split()
