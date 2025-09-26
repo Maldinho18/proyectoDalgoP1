@@ -91,7 +91,6 @@ def main():
         return
     it = iter(data)
     t = int(next(it))
-    out = []
     for _ in range(t):
         k = int(next(it)); n = int(next(it))
         P0 = int(next(it)); P1 = int(next(it)); P2 = int(next(it)); P3 = int(next(it)); P4 = int(next(it))
